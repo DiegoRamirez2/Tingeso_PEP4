@@ -1,0 +1,21 @@
+server:
+  port: 8090
+  servlet:
+    encoding:
+      charset: UTF-8
+
+spring:
+  application:
+    name: PythonAcademy
+  jpa:
+    show-sql: true
+    hibernate:
+      dialect: PostgreSQL9Dialect
+      ddl-auto: create-drop
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    dbname: problemas
+
+    url: jdbc:postgresql://localhost:5432/problemas
+    username: postgres
+    password: 1234

@@ -1,0 +1,283 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-acopio
+  labels:
+    app: postgres-acopio
+spec:
+  selector:
+    matchLabels:
+      app: postgres-acopio
+  template:
+    metadata:
+      labels:
+        app: postgres-acopio
+    spec:
+      containers:
+        - name: postgres-acopio
+          image: postgres:latest
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: "1234"
+            - name: POSTGRES_DB
+              value: "acopio"
+          volumeMounts:
+            - name: postgres-acopio-persistent-storage
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: postgres-acopio-persistent-storage
+          persistentVolumeClaim:
+            claimName: postgres-acopio-pv-claim
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-acopio-pv-claim
+  labels:
+    app: postgres-acopio
+    tier: database
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 0.5Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-acopio
+  labels:
+    app: postgres-acopio
+spec:
+  ports:
+    - port: 5432
+      targetPort: 5432
+  selector:
+    app: postgres-acopio
+  clusterIP: None
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: acopio-db
+data:
+  name: "acopio"
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-proveedor
+  labels:
+    app: postgres-proveedor
+spec:
+  selector:
+    matchLabels:
+      app: postgres-proveedor
+  template:
+    metadata:
+      labels:
+        app: postgres-proveedor
+    spec:
+      containers:
+        - name: postgres-proveedor
+          image: postgres:latest
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: "1234"
+            - name: POSTGRES_DB
+              value: "proveedor"
+          volumeMounts:
+            - name: postgres-proveedor-persistent-storage
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: postgres-proveedor-persistent-storage
+          persistentVolumeClaim:
+            claimName: postgres-proveedor-pv-claim
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-proveedor-pv-claim
+  labels:
+    app: postgres-proveedor
+    tier: database
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 0.5Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-proveedor
+  labels:
+    app: postgres-proveedor
+spec:
+  ports:
+    - port: 5432
+      targetPort: 5432
+  selector:
+    app: postgres-proveedor
+  clusterIP: None
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: proveedor-db
+data:
+  name: "proveedor"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-laboratorio
+  labels:
+    app: postgres-laboratorio
+spec:
+  selector:
+    matchLabels:
+      app: postgres-laboratorio
+  template:
+    metadata:
+      labels:
+        app: postgres-laboratorio
+    spec:
+      containers:
+        - name: postgres-laboratorio
+          image: postgres:latest
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: "1234"
+            - name: POSTGRES_DB
+              value: "laboratorio"
+          volumeMounts:
+            - name: postgres-laboratorio-persistent-storage
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: postgres-laboratorio-persistent-storage
+          persistentVolumeClaim:
+            claimName: postgres-laboratorio-pv-claim
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-laboratorio-pv-claim
+  labels:
+    app: postgres-laboratorio
+    tier: database
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 0.5Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-laboratorio
+  labels:
+    app: postgres-laboratorio
+spec:
+  ports:
+    - port: 5432
+      targetPort: 5432
+  selector:
+    app: postgres-laboratorio
+  clusterIP: None
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: laboratorio-db
+data:
+  name: "laboratorio"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-pagos
+  labels:
+    app: postgres-pagos
+spec:
+  selector:
+    matchLabels:
+      app: postgres-pagos
+  template:
+    metadata:
+      labels:
+        app: postgres-pagos
+    spec:
+      containers:
+        - name: postgres-pagos
+          image: postgres:latest
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: "1234"
+            - name: POSTGRES_DB
+              value: "pagos"
+          volumeMounts:
+            - name: postgres-pagos-persistent-storage
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: postgres-pagos-persistent-storage
+          persistentVolumeClaim:
+            claimName: postgres-pagos-pv-claim
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pagos-pv-claim
+  labels:
+    app: postgres-pagos
+    tier: database
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 0.5Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-pagos
+  labels:
+    app: postgres-pagos
+spec:
+  ports:
+    - port: 5432
+      targetPort: 5432
+  selector:
+    app: postgres-pagos
+  clusterIP: None
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pagos-db
+data:
+  name: "pagos"

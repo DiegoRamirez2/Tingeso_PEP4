@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="Movimientos" />
+        <module name="config-service" />
+        <module name="Salida" />
+        <module name="Entrada (1)" />
+        <module name="gateway-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="config-service" target="17" />
+      <module name="Entrada" target="11" />
+      <module name="Entrada (1)" target="11" />
+      <module name="Entrada (2)" target="11" />
+      <module name="Entrada (3)" target="11" />
+      <module name="gateway-service" target="11" />
+      <module name="Movimientos" target="11" />
+      <module name="Problemas" target="11" />
+      <module name="Problemas (1)" target="11" />
+      <module name="Problemas (2)" target="11" />
+      <module name="Salida" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Entrada" options="-parameters" />
+      <module name="Entrada (1)" options="-parameters" />
+      <module name="Entrada (2)" options="-parameters" />
+      <module name="Entrada (3)" options="-parameters" />
+      <module name="Movimientos" options="-parameters" />
+      <module name="Problemas" options="-parameters" />
+      <module name="Problemas (1)" options="-parameters" />
+      <module name="Problemas (2)" options="-parameters" />
+      <module name="Salida" options="-parameters" />
+      <module name="config-service" options="-parameters" />
+      <module name="gateway-service" options="-parameters" />
+    </option>
+  </component>
+</project>
