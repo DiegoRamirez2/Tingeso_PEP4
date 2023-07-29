@@ -1,12 +1,12 @@
 server:
-  port: 8090
+  port: 8083
   servlet:
     encoding:
       charset: UTF-8
 
 spring:
   application:
-    name:
+    name: entrada-service
   jpa:
     show-sql: true
     hibernate:
@@ -16,6 +16,6 @@ spring:
     driver-class-name: org.postgresql.Driver
     dbname: problemas
 
-    url: jdbc:postgresql://localhost:5432/problemas
+    url: jdbc:postgresql://localhost:5432/entrada
     username: postgres
     password: 1234
