@@ -40,11 +40,21 @@ export default function RegistrarComponent() {
     if (!fecha || !tipoDoc || !numeroDoc || !motivo || !cantidad) {
       swal("Por favor, llena todos los campos", { icon: "error", timer: "3000" });
       return false;
-} else if(RegistrarService.Movimiento(numeroDoc) === true){
-      swal("El movimiento ya existe", { icon: "error", timer: "3000" });
-      return false;
+    } else {
+      RegistrarService.existeMovimiento(numeroDoc)
+        .then((response) => {
+          if (response.data === true) {
+            swal("El movimiento ya existe, ingrese otro número de documento", { icon: "error", timer: "3000" });
+          } else {
+          }
+        })
+        .catch((error) => {
+          console.error("Error al hacer la solicitud GET:", error);
+          // Manejar el error en caso de que la solicitud falle
+          // ...
+        });
+      return true;
     }
-    return true;
   };
 
   const saveMovimiento = e => {

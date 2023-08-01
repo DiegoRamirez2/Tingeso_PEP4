@@ -27,13 +27,15 @@ public class MovimientosController {
         MovimientosEntity movimiento = movimientosService.obtenerMovimientoId(id);
         return ResponseEntity.ok(movimiento);
     }
-    @GetMapping("/{numDoc}")
+    @GetMapping("/numDoc/{numDoc}")
     public ResponseEntity<Boolean> getMovimientoNumDoc(@PathVariable("numDoc") String numDoc){
         MovimientosEntity movimiento = movimientosService.obtenerMovimientoNumDoc(numDoc);
         if(movimiento == null){
+            System.out.println("No existe el movimiento");
             return ResponseEntity.ok(false);
         }
         else{
+            System.out.println("Existe el movimiento");
             return ResponseEntity.ok(true);
         }
     }

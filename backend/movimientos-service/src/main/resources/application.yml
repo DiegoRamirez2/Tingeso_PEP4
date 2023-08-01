@@ -1,0 +1,21 @@
+server:
+  port: 8085
+  servlet:
+    encoding:
+      charset: UTF-8
+
+spring:
+  application:
+    name: movimientos-service
+  jpa:
+    show-sql: true
+    hibernate:
+      dialect: PostgreSQL9Dialect
+      ddl-auto: create-drop
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    dbname: movimientos
+
+    url: jdbc:postgresql://localhost:5432/movimientos
+    username: postgres
+    password: 1234

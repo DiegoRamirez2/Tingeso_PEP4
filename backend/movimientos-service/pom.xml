@@ -56,6 +56,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>movimientos-service</finalName>
 	</build>
 
 </project>
