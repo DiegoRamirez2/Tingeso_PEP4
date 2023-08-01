@@ -16,7 +16,7 @@ public class EntradaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idEntrada;
     private LocalDate fecha;
-    private String tipo;
+    private String tipoDoc;
     private String numDoc;
     private String motivo;
     private float ingreso;

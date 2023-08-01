@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: acopio-service
+  name: entrada-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: acopio-service
+      app: entrada-service
   template:
     metadata:
       labels:
-        app: acopio-service
+        app: entrada-service
     spec:
       containers:
-        - name: acopio-service
-          image: ijynx1/acopio-service:latest
+        - name: entrada-service
+          image: ijynx1/entrada-service:latest
           ports:
             - containerPort: 8083
           env:
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:postgresql://postgres-acopio:5432/acopio
+              value: jdbc:postgresql://postgres-entrada:5432/entrada
             - name: SPRING_DATASOURCE_USERNAME
               value: "postgres"
             - name: SPRING_DATASOURCE_PASSWORD
@@ -28,52 +28,25 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: proveedor-service
+  name: salida-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: proveedor-service
+      app: salida-service
   template:
     metadata:
       labels:
-        app: proveedor-service
+        app: salida-service
     spec:
       containers:
-        - name: proveedor-service
-          image: ijynx1/proveedor-service:latest
-          ports:
-            - containerPort: 8082
-          env:
-            - name: SPRING_DATASOURCE_URL
-              value: jdbc:postgresql://postgres-proveedor:5432/proveedor
-            - name: SPRING_DATASOURCE_USERNAME
-              value: "postgres"
-            - name: SPRING_DATASOURCE_PASSWORD
-              value: "1234"
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: laboratorio-service
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: laboratorio-service
-  template:
-    metadata:
-      labels:
-        app: laboratorio-service
-    spec:
-      containers:
-        - name: laboratorio-service
-          image: ijynx1/laboratorio-service:latest
+        - name: salida-service
+          image: ijynx1/salida-service:latest
           ports:
             - containerPort: 8084
           env:
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:postgresql://postgres-laboratorio:5432/laboratorio
+              value: jdbc:postgresql://postgres-salida:5432/salida
             - name: SPRING_DATASOURCE_USERNAME
               value: "postgres"
             - name: SPRING_DATASOURCE_PASSWORD
@@ -82,25 +55,25 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pagos-service
+  name: movimientos-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: pagos-service
+      app: movimientos-service
   template:
     metadata:
       labels:
-        app: pagos-service
+        app: movimientos-service
     spec:
       containers:
-        - name: pagos-service
-          image: ijynx1/pagos-service:latest
+        - name: movimientos-service
+          image: ijynx1/movimientos-service:latest
           ports:
             - containerPort: 8085
           env:
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:postgresql://postgres-pagos:5432/pagos
+              value: jdbc:postgresql://postgres-movimientos:5432/movimientos
             - name: SPRING_DATASOURCE_USERNAME
               value: "postgres"
             - name: SPRING_DATASOURCE_PASSWORD

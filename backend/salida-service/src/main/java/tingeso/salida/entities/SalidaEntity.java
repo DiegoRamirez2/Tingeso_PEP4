@@ -19,7 +19,7 @@ public class SalidaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idSalida;
     private LocalDate fecha;
-    private String tipo;
+    private String tipoDoc;
     private String numDoc;
     private String motivo;
     private float salida;

@@ -9,12 +9,12 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SalidaModel {
+public class EntradaModel {
 
-    private Integer idSalida;
+    private Integer idEntrada;
     private LocalDate fecha;
     private String tipoDoc;
     private String numDoc;
     private String motivo;
-    private float salida;
+    private float ingreso;
 }

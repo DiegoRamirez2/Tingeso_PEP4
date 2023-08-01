@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/movimientos")
+@CrossOrigin(origins = "*")
 public class MovimientosController {
     @Autowired
     private MovimientosService movimientosService;
@@ -26,6 +27,17 @@ public class MovimientosController {
         MovimientosEntity movimiento = movimientosService.obtenerMovimientoId(id);
         return ResponseEntity.ok(movimiento);
     }
+    @GetMapping("/{numDoc}")
+    public ResponseEntity<Boolean> getMovimientoNumDoc(@PathVariable("numDoc") String numDoc){
+        MovimientosEntity movimiento = movimientosService.obtenerMovimientoNumDoc(numDoc);
+        if(movimiento == null){
+            return ResponseEntity.ok(false);
+        }
+        else{
+            return ResponseEntity.ok(true);
+        }
+    }
+
     @PostMapping
     public ResponseEntity<MovimientosEntity> createMovimiento(@RequestBody MovimientosEntity movimiento){
         MovimientosEntity movimientoDB = movimientosService.createMovimiento(movimiento);
@@ -38,10 +50,15 @@ public class MovimientosController {
     }
     @GetMapping("/getEntreFechas/{fecha1}/{fecha2}")
     public ResponseEntity<List<MovimientosEntity>> getMovimientosEntreFechas(@PathVariable("fecha1") String fecha1, @PathVariable("fecha2") String fecha2){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate fechaInicio = LocalDate.parse(fecha1, formatter);
         LocalDate fechaFin = LocalDate.parse(fecha2, formatter);
-        List<MovimientosEntity> movimientos = movimientosService.getEntreFecha(fechaInicio, fechaFin);
-        return ResponseEntity.ok(movimientos);
+        if(fechaFin.isAfter(fechaInicio)){
+            List<MovimientosEntity> movimientos = movimientosService.getEntreFecha(fechaInicio, fechaFin);
+            return ResponseEntity.ok(movimientos);
+        }
+        else{
+            return ResponseEntity.ok(null);
+        }
     }
 }

@@ -15,40 +15,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: eureka-service
+  name: entrada-service
   labels:
-    app: eureka-service
+    app: entrada-service
 spec:
   selector:
-    app: eureka-service
-  ports:
-    - protocol: TCP
-      port: 8761
-      targetPort: 8761
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: proveedor-service
-  labels:
-    app: proveedor-service
-spec:
-  selector:
-    app: proveedor-service
-  ports:
-    - protocol: TCP
-      port: 8082
-      targetPort: 8082
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: acopio-service
-  labels:
-    app: acopio-service
-spec:
-  selector:
-    app: acopio-service
+    app: entrada-service
   ports:
     - protocol: TCP
       port: 8083
@@ -57,12 +29,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: laboratorio-service
+  name: salida-service
   labels:
-    app: laboratorio-service
+    app: salida-service
 spec:
   selector:
-    app: laboratorio-service
+    app: salida-service
   ports:
     - protocol: TCP
       port: 8084
@@ -71,12 +43,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: pagos-service
+  name: movimientos-service
   labels:
-    app: pagos-service
+    app: movimientos-service
 spec:
   selector:
-    app: pagos-service
+    app: movimientos-service
   ports:
     - protocol: TCP
       port: 8085

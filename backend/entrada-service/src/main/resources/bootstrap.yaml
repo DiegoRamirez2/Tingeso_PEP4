@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: entrada-service
+  cloud:
+    config:
+      enabled: true
+      uri: http://config-service:8081
+  datasource:
+    url: jdbc:postgresql://localhost:5432/acopio?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
+    username: postgres
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

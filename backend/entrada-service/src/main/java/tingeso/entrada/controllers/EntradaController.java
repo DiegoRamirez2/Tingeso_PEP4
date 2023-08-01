@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/entrada")
+@CrossOrigin(origins = "*")
 public class EntradaController {
     @Autowired
     private EntradaService entradaService;
@@ -40,7 +41,7 @@ public class EntradaController {
     }
     @GetMapping("/entreFecha/{fecha1}/{fecha2}")
     public ResponseEntity<List<EntradaEntity>> getEntradasEntreFechas(@PathVariable("fecha1") String fecha1, @PathVariable("fecha2") String fecha2){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate fechaInicio = LocalDate.parse(fecha1, formatter);
         LocalDate fechaFin = LocalDate.parse(fecha2, formatter);
         List<EntradaEntity> entradas = entradaService.getEntreFecha(fechaInicio, fechaFin);

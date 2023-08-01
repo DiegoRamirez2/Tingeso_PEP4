@@ -1,0 +1,10 @@
+INSERT INTO entrada (fecha, tipo_doc, num_doc, motivo, ingreso) VALUES ('2023-07-01', 'Boleta', '00001', 'Ingreso a caja', 1000);
+INSERT INTO entrada (fecha, tipo_doc, num_doc, motivo, ingreso) VALUES ('2023-07-02', 'Boleta', '00002', 'Ingreso a caja', 2000);
+INSERT INTO entrada (fecha, tipo_doc, num_doc, motivo, ingreso) VALUES ('2023-07-03', 'Boleta', '00003', 'Ingreso a caja', 1500);
+INSERT INTO entrada (fecha, tipo_doc, num_doc, motivo, ingreso) VALUES ('2023-07-04', 'Boleta', '00004', 'Ingreso a caja', 2300);
+INSERT INTO entrada (fecha, tipo_doc, num_doc, motivo, ingreso) VALUES ('2023-07-05', 'Boleta', '00005', 'Ingreso a caja', 700);
+INSERT INTO entrada (fecha, tipo_doc, num_doc, motivo, ingreso) VALUES ('2023-07-06', 'Boleta', '00006', 'Ingreso a caja', 3400);
+INSERT INTO entrada (fecha, tipo_doc, num_doc, motivo, ingreso) VALUES ('2023-07-07', 'Boleta', '00007', 'Ingreso a caja', 1900);
+INSERT INTO entrada (fecha, tipo_doc, num_doc, motivo, ingreso) VALUES ('2023-07-08', 'Boleta', '00008', 'Ingreso a caja', 2200);
+INSERT INTO entrada (fecha, tipo_doc, num_doc, motivo, ingreso) VALUES ('2023-07-09', 'Boleta', '00009', 'Ingreso a caja', 2500);
+INSERT INTO entrada (fecha, tipo_doc, num_doc, motivo, ingreso) VALUES ('2023-07-10', 'Boleta', '00010', 'Ingreso a caja', 3000);

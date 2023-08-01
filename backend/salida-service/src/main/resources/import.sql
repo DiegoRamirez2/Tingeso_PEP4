@@ -1,0 +1,10 @@
+INSERT INTO salida (fecha, tipo_doc, num_doc, motivo, salida) VALUES ('2023-07-01', 'Factura', '001-000001', 'Alimentacion', 500);
+INSERT INTO salida (fecha, tipo_doc, num_doc, motivo, salida) VALUES ('2023-07-02', 'Factura', '002-000002', 'Reparación', 300);
+INSERT INTO salida (fecha, tipo_doc, num_doc, motivo, salida) VALUES ('2023-07-03', 'Factura', '003-000003', 'Transporte', 200);
+INSERT INTO salida (fecha, tipo_doc, num_doc, motivo, salida) VALUES ('2023-07-04', 'Factura', '004-000004', 'Alquiler', 1000);
+INSERT INTO salida (fecha, tipo_doc, num_doc, motivo, salida) VALUES ('2023-07-05', 'Factura', '005-000005', 'Alimentacion', 600);
+INSERT INTO salida (fecha, tipo_doc, num_doc, motivo, salida) VALUES ('2023-07-06', 'Factura', '006-000006', 'Reparación', 700);
+INSERT INTO salida (fecha, tipo_doc, num_doc, motivo, salida) VALUES ('2023-07-07', 'Factura', '007-000007', 'Transporte', 400);
+INSERT INTO salida (fecha, tipo_doc, num_doc, motivo, salida) VALUES ('2023-07-08', 'Factura', '008-000008', 'Alquiler', 900);
+INSERT INTO salida (fecha, tipo_doc, num_doc, motivo, salida) VALUES ('2023-07-09', 'Factura', '009-000009', 'Alimentacion', 800);
+INSERT INTO salida (fecha, tipo_doc, num_doc, motivo, salida) VALUES ('2023-07-10', 'Factura', '010-000010', 'Reparación', 600);

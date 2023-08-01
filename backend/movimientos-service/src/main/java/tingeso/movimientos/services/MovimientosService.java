@@ -1,14 +1,21 @@
 package tingeso.movimientos.services;
 
+import jakarta.persistence.PersistenceException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import tingeso.movimientos.entities.MovimientosEntity;
+import tingeso.movimientos.models.EntradaModel;
 import tingeso.movimientos.models.MovimientoModel;
 import tingeso.movimientos.models.SalidaModel;
 import tingeso.movimientos.repositories.MovimientosRepository;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,7 +35,12 @@ public class MovimientosService {
         return movimientosRepository.findById(id).orElse(null);
     }
     public MovimientosEntity createMovimiento(MovimientosEntity movimiento){
-        return movimientosRepository.save(movimiento);
+        if(obtenerMovimientoNumDoc(movimiento.getNumDoc()) == null){
+            return movimientosRepository.save(movimiento);
+        }
+        else{
+            return null;
+        }
     }
     public MovimientosEntity deleteMovimiento(int id){
         MovimientosEntity movimiento = movimientosRepository.findById(id).orElse(null);
@@ -37,19 +49,37 @@ public class MovimientosService {
     }
 
     public List<MovimientoModel> getMovimientoEntreFecha(LocalDate fechaInicio, LocalDate fechaFin, String tipo){
+        List<MovimientoModel> movimientos = new ArrayList<MovimientoModel>();
         if(tipo.equals("entrada")){
-            return restTemplate.getForObject("http://localhost:8080/" + tipo +"/entreFecha/"+fechaInicio+"/"+fechaFin, List.class);
-        }
-        List<MovimientoModel> movimientos = restTemplate.getForObject("http://localhost:8080/" + tipo +"/entreFecha/"+fechaInicio+"/"+fechaFin, List.class);
-        if(movimientos != null){
-            for(MovimientoModel movimiento : movimientos){
-                movimiento.setCantidad(movimiento.getCantidad()*-1);
+            ParameterizedTypeReference<List<EntradaModel>> typeRef = new ParameterizedTypeReference<>() {};
+            ResponseEntity<List<EntradaModel>> responseEntity = restTemplate.exchange("http://localhost:8080/" + tipo + "/entreFecha/" + fechaInicio + "/" + fechaFin, HttpMethod.GET, null, typeRef);
+            List<EntradaModel> entradas = responseEntity.getBody();
+            for(EntradaModel entrada : entradas){
+                MovimientoModel movimiento = new MovimientoModel();
+                movimiento.setFecha(entrada.getFecha());
+                movimiento.setTipoDoc(entrada.getTipoDoc());
+                movimiento.setNumDoc(entrada.getNumDoc());
+                movimiento.setMotivo(entrada.getMotivo());
+                movimiento.setCantidad(entrada.getIngreso());
+                movimientos.add(movimiento);
             }
-            return movimientos;
         }
-        return null;
+        else if(tipo.equals("salida")){
+            ParameterizedTypeReference<List<SalidaModel>> typeRef = new ParameterizedTypeReference<>() {};
+            ResponseEntity<List<SalidaModel>> responseEntity = restTemplate.exchange("http://localhost:8080/" + tipo + "/entreFecha/" + fechaInicio + "/" + fechaFin, HttpMethod.GET, null, typeRef);
+            List<SalidaModel> salidas = responseEntity.getBody();
+            for(SalidaModel salida : salidas){
+                MovimientoModel movimiento = new MovimientoModel();
+                movimiento.setFecha(salida.getFecha());
+                movimiento.setTipoDoc(salida.getTipoDoc());
+                movimiento.setNumDoc(salida.getNumDoc());
+                movimiento.setMotivo(salida.getMotivo());
+                movimiento.setCantidad(salida.getSalida()*-1);
+                movimientos.add(movimiento);
+            }
+        }
+        return movimientos;
     }
-
 
     public void CalcularEntreFecha(LocalDate fechaInicio, LocalDate fechaFin){
         List<MovimientoModel> entradas = getMovimientoEntreFecha(fechaInicio, fechaFin, "entrada");
@@ -73,12 +103,16 @@ public class MovimientosService {
                 movimientoActual.setIngreso(0);
                 movimientoActual.setSalida(movimiento.getCantidad()*-1);
             }
+                createMovimiento(movimientoActual);
         }
-
     }
+    @Transactional
     public List<MovimientosEntity> getEntreFecha(LocalDate fechaInicio, LocalDate fechaFin){
         CalcularEntreFecha(fechaInicio, fechaFin);
         return movimientosRepository.getEntreFecha(fechaInicio, fechaFin);
     }
 
+    public MovimientosEntity obtenerMovimientoNumDoc(String numDoc) {
+        return movimientosRepository.findByNumDoc(numDoc);
+    }
 }
