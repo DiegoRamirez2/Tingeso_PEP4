@@ -9,7 +9,6 @@ def ejecutar_comandos_en_carpeta(carpeta, ruta_raiz):
     comando_verificar = "docker images -q ijynx1/" + carpeta
     output = os.popen(comando_verificar).read().strip()
 
-    
     # Ejecutar los comandos de construcción y envío
     comando_build = "docker build -t ijynx1/" + carpeta + " ."
     os.system(comando_build)

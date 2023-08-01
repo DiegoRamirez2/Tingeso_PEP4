@@ -52,7 +52,7 @@ public class MovimientosService {
         List<MovimientoModel> movimientos = new ArrayList<MovimientoModel>();
         if(tipo.equals("entrada")){
             ParameterizedTypeReference<List<EntradaModel>> typeRef = new ParameterizedTypeReference<>() {};
-            ResponseEntity<List<EntradaModel>> responseEntity = restTemplate.exchange("http://localhost:8080/" + tipo + "/entreFecha/" + fechaInicio + "/" + fechaFin, HttpMethod.GET, null, typeRef);
+            ResponseEntity<List<EntradaModel>> responseEntity = restTemplate.exchange("http://entrada-service:8083/" + tipo + "/entreFecha/" + fechaInicio + "/" + fechaFin, HttpMethod.GET, null, typeRef);
             List<EntradaModel> entradas = responseEntity.getBody();
             for(EntradaModel entrada : entradas){
                 MovimientoModel movimiento = new MovimientoModel();
@@ -66,7 +66,7 @@ public class MovimientosService {
         }
         else if(tipo.equals("salida")){
             ParameterizedTypeReference<List<SalidaModel>> typeRef = new ParameterizedTypeReference<>() {};
-            ResponseEntity<List<SalidaModel>> responseEntity = restTemplate.exchange("http://localhost:8080/" + tipo + "/entreFecha/" + fechaInicio + "/" + fechaFin, HttpMethod.GET, null, typeRef);
+            ResponseEntity<List<SalidaModel>> responseEntity = restTemplate.exchange("http://salida-service:8084/" + tipo + "/entreFecha/" + fechaInicio + "/" + fechaFin, HttpMethod.GET, null, typeRef);
             List<SalidaModel> salidas = responseEntity.getBody();
             for(SalidaModel salida : salidas){
                 MovimientoModel movimiento = new MovimientoModel();
@@ -108,6 +108,7 @@ public class MovimientosService {
     }
     @Transactional
     public List<MovimientosEntity> getEntreFecha(LocalDate fechaInicio, LocalDate fechaFin){
+        movimientosRepository.eliminarEntreFecha(fechaInicio, fechaFin);
         CalcularEntreFecha(fechaInicio, fechaFin);
         return movimientosRepository.getEntreFecha(fechaInicio, fechaFin);
     }

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/entrada-service/Entrada (1).iml" filepath="$PROJECT_DIR$/entrada-service/Entrada (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/entrada-service/Entrada.iml" filepath="$PROJECT_DIR$/entrada-service/Entrada.iml" />
       <module fileurl="file://$PROJECT_DIR$/movimientos-service/Movimientos.iml" filepath="$PROJECT_DIR$/movimientos-service/Movimientos.iml" />
       <module fileurl="file://$PROJECT_DIR$/salida-service/Salida.iml" filepath="$PROJECT_DIR$/salida-service/Salida.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/backend.iml" filepath="$PROJECT_DIR$/.idea/backend.iml" />
